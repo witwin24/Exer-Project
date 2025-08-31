@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+   
+
+</head>
+
+<body>
+    <h1>My Shopping List</h1>
+
+    <div id="form-addItem">
+
+        <label for="item_name">Item Name:<span style="color:red;">*</span></label>
+        <br>
+        <input type="text" name="item_name" id="item_name" required>
+        <br>
+        <label for="item_price">Item Price:<span style="color:red;">*</span></label>
+        <br>
+        <input type="number" min=0 name="item_price" id="item_price" required>
+        <br>
+        <button onclick="addItem()">Add Item</button>
+        <br>
+    </div>
+    <div id="shoppinglist">
+        <h2>My shoppingList</h2>
+        <table id="item_list">
+
+
+        </table>
+    </div>
+     <script src="./script.js"></script>
+</body>
+
+</html>
