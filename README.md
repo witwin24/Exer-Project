@@ -1,1 +1,1 @@
-# Ex-Project
+# Exercise Project
