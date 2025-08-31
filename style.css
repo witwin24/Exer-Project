@@ -1,0 +1,121 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+}
+#regis-cont {
+    width: 700px;
+    margin-bottom: 20px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    max-width: 700px;
+    text-align: center;
+}
+input {
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 10px;
+    border: #bebebe solid 1px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+label {
+    display: block;        
+    text-align: left;
+    font-weight: bold;
+    font-size: 16px;
+}
+#reg-btn {
+    color: white;
+    font-weight: bold;
+    background-color: #367feb;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 25px;
+    cursor: pointer;
+}
+#search-bar {
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+    gap: 10px; /* เว้นช่องว่างระหว่าง input กับปุ่ม */
+}
+#searchInput{
+    flex: 1;
+    margin: 0;
+}
+#search-btn{
+     color: white;
+    font-weight: bold;
+    background-color: #367feb;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    width: 15%;
+    display: inline;
+    text-align: left;
+}
+#reg-btn:hover,#search-btn:hover {
+    background-color: #0052cc;
+}
+#searchInput{
+    margin: 0;
+    width: 80%;
+}
+a{
+    width: 100%;
+    font-weight: bold;
+    color: #367feb;
+    text-decoration: none;
+}
+a:hover{
+    color: #0052cc;
+}
+table{
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+table,
+tr,
+th,
+td {
+    padding: 5px;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+th {
+    text-align: left;
+    padding: 10px;
+    background-color: rgb(215, 215, 215);
+}
+.delete-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 200;
+}
+
+.delete-btn:hover {
+    background-color: #e60000;
+}
+
