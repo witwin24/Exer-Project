@@ -2,6 +2,8 @@ const regname = document.getElementById("name");
 const email = document.getElementById("email");
 const phone = document.getElementById("phone");
 const registorlist = document.getElementById("regisList");
+const thead = document.getElementById("thead");
+const tbody = document.getElementById("tbody");
 
 document.addEventListener("DOMContentLoaded", renderUI);
 
@@ -13,7 +15,7 @@ function renderUI() {
         registorlist.innerHTML = `<tr><td colspan="3" style="text-align:center;">Not Found Data !!</td></tr>`;
         return;
     }
-    registorlist.innerHTML = `<tr> 
+    thead.innerHTML = `<tr>
     <th>Name</th> 
     <th>Email</th> 
     <th>Phone Number</th> 
@@ -21,7 +23,7 @@ function renderUI() {
     </tr>`;
 
     for (let i = 0; i < savedItems.length; i++) {
-        registorlist.innerHTML += `
+        tbody.innerHTML += `
             <tr>
                 <td>${savedItems[i].name}</td>
                 <td>${savedItems[i].email}</td>
@@ -33,10 +35,14 @@ function renderUI() {
 
 
 function deleteItem(id) {
+const isConfirmed = confirm('ต้องการลบข้อมูลใช่หรือไม่');
 
+    if (!isConfirmed) return; // ถ้าไม่ยืนยัน ให้ยกเลิก
     let savedItems = JSON.parse(localStorage.getItem("registorList") || []);
     savedItems = savedItems.filter(item => (item.id != id));
     localStorage.setItem("registorList", JSON.stringify(savedItems));
+
+    alert('ลบข้อมูลสำเร็จ!!');
 
     renderUI();
 }

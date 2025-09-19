@@ -13,7 +13,7 @@ body {
     padding-top: 40px;
 }
 #regis-cont {
-    width: 700px;
+    width: 100%;
     margin-bottom: 20px;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
@@ -69,7 +69,7 @@ label {
     border: none;
     width: 15%;
     display: inline;
-    text-align: left;
+    text-align: center;
 }
 #reg-btn:hover,#search-btn:hover {
     background-color: #0052cc;
@@ -119,3 +119,62 @@ th {
     background-color: #e60000;
 }
 
+@media (max-width: 768px) {
+    body {
+        padding: 20px 10px;
+    }
+
+    #regis-cont {
+        width: 100%;
+        padding: 15px;
+    }
+
+    input {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    #search-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #searchInput, #search-btn {
+        width: 100%;
+    }
+
+    #search-btn {
+        text-align: center;
+    }
+
+    table, thead, tbody, th, td, tr {
+        font-size: 14px;
+        word-wrap: break-word;
+    }
+
+    .delete-btn {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    input, #reg-btn, #search-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    th, td {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .delete-btn {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+}

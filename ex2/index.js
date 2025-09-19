@@ -25,7 +25,8 @@ function register() {
   regname.value = '';
   email.value = '';
   phone.value = '';
-
+  
+  alert('ลงทะเบียนสำเร็จ!!');
 
 }
 
