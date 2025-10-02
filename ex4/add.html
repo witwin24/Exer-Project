@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./edit.css">
+</head>
+<body>
+    <form id="form" method="POST">
+        <h3>เพิ่มข้อมูลสมาชิก</h3>
+        <br />
+        <label for="id">Id</label><br />
+        <input name="id" type="text" placeholder="Id" />
+        <br />
+        <label for="title">Title</label><br />
+        <input type="text" name="title" placeholder="Title" />
+        <br />
+        <label for="bio">Bio</label><br />
+        <input type="text" name="bio" placeholder="Bio" />
+        <br />
+        <label for="website">Website</label><br />
+        <input type="text" name="website" placeholder="Website" />
+        <br />
+        <label for="graduated">Graduated</label><br />
+        <select id="graduated" name="graduated" required>
+          <option value="" disabled selected>เลือกสถานะ</option>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+        <br />
+        <a href="./api.html">ยกเลิก</a>
+        <button type="submit">บันทึก</button>
+      </form>
+    </div>
+  </body>
+  <script src="./add.js"></script>
+</body>
+</html>

@@ -2,6 +2,8 @@ const membersContainer = document.getElementById("members");
 const searchInput = document.getElementById("searchInput");
 const message = document.getElementById("message");
 let members = [];
+const params = new URLSearchParams(window.location.search);
+const memberId = params.get("id");
 
 async function loadMembers() {
   try {
@@ -48,7 +50,6 @@ function renderMembers(list) {
       websiteHTML = `<a href="${escapeHTML(m.website)}" target="_blank">${escapeHTML(m.website)}</a>`;
     }
 
-    // จัดการ graduated
     let graduatedHTML = m.graduated
       ? `<span style="color:green;">Yes</span>`
       : `<span style="color:red;">No</span>`;
@@ -59,13 +60,28 @@ function renderMembers(list) {
       <div class="bio">${escapeHTML(m.bio)}</div>
       <div class="website">${websiteHTML}</div>
       <div class="graduated">Graduated : ${graduatedHTML}</div>
-      <div class="bt"><button class="bt-edit"><a>แก้ไข</a></button><button class="bt-delt">ลบ</button></div>
+      <div class="bt"><a href="./edit.html?id=${encodeURIComponent(m.id)}">แก้ไข</a><button class="bt-delt">ลบ</button></div>
       
     `;
-
+    const deleteButton = card.querySelector(".bt-delt");
+    deleteButton.addEventListener("click", () => deleteMember(m.id));
     membersContainer.appendChild(card);
   });
 }
+async function deleteMember(id) {
+  if (!confirm(`ยืนยันการลบสมาชิก ${id} ?`)) return;
+  try{
+    await fetch(`https://api.tsukijou.dev/members/${id}`, {
+      method: "DELETE"
+    });
+    alert(`ลบสมาชิก ${id} เรียบร้อย`);
+    loadMembers(); // โหลดข้อมูลใหม่
+  }catch(err){
+    console.error("Delete error:", err);
+  }
+}
+
+
 
 
 searchInput.addEventListener("input", () => {
