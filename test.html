@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Popup Form</title>
+<style>
+  /* พื้นหลังมืดเมื่อเปิด popup */
+  .popup-bg {
+    display: none; /* เริ่มต้นซ่อน */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+
+  /* กล่อง popup */
+  .popup-box {
+    background: white;
+    padding: 25px 30px;
+    border-radius: 16px;
+    width: 350px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease;
+  }
+
+  .popup-box h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #333;
+  }
+
+  /* สไตล์ฟอร์ม */
+  .popup-box input,
+  .popup-box select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 16px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+
+  /* ปุ่ม */
+  .popup-box button,
+  .popup-box a {
+    display: inline-block;
+    width: 48%;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 0;
+    border-radius: 8px;
+    transition: 0.2s;
+  }
+
+  .popup-box button {
+    background: #28a745;
+    color: white;
+    border: none;
+  }
+
+  .popup-box button:hover {
+    background: #218838;
+  }
+
+  .popup-box a {
+    background: #ccc;
+    color: #333;
+  }
+
+  .popup-box a:hover {
+    background: #bbb;
+  }
+
+  /* ปุ่มเปิด popup */
+  .open-btn {
+    padding: 10px 18px;
+    border: none;
+    background: dodgerblue;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .open-btn:hover {
+    background: #0074e0;
+  }
+
+  /* แอนิเมชัน */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+
+<body>
+  <h2>ตัวอย่าง Popup Form</h2>
+  <button class="open-btn" onclick="openPopup()">+ เพิ่มสมาชิก</button>
+
+  <!-- พื้นหลัง Popup -->
+  <div class="popup-bg" id="popup">
+    <div class="popup-box">
+      <form id="form-add" method="POST">
+        <h3>เพิ่มข้อมูลสมาชิก</h3>
+
+        <label for="id">Id</label>
+        <input name="id" type="text" placeholder="Id" required />
+
+        <label for="title">Title</label>
+        <input type="text" name="title" placeholder="Title" />
+
+        <label for="bio">Bio</label>
+        <input type="text" name="bio" placeholder="Bio" />
+
+        <label for="website">Website</label>
+        <input type="text" name="website" placeholder="Website" />
+
+        <label for="graduated">Graduated</label>
+        <select id="graduated" name="graduated" required>
+          <option value="" disabled selected>เลือกสถานะ</option>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+
+        <div style="display: flex; justify-content: space-between;">
+          <a href="#" onclick="closePopup()">ยกเลิก</a>
+          <button type="submit">บันทึก</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const popup = document.getElementById("popup");
+
+    function openPopup() {
+      popup.style.display = "flex";
+    }
+
+    function closePopup() {
+      popup.style.display = "none";
+    }
+
+    // ปิดเมื่อคลิกนอกกล่อง
+    window.onclick = function (event) {
+      if (event.target === popup) {
+        closePopup();
+      }
+    };
+  </script>
+</body>
+</html>

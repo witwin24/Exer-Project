@@ -89,7 +89,7 @@ searchInput.addEventListener("input", () => {
   const filtered = members.filter(
     (m) =>
       m.id.toLowerCase().includes(keyword) ||
-      m.name.toLowerCase().includes(keyword)
+      m.title.toLowerCase().includes(keyword)
   );
   renderMembers(filtered);
 });
