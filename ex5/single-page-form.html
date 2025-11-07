@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css.css">
+</head>
+<body>
+    <div id="home">
+        <h1>Members</h1>
+  <input type="text" id="searchInput" placeholder="Search Member (id or title) ..."/>
+  <div id="add"><button id="bt-add" >+ เพิ่มสมาชิก</button></div>
+  <div id="members"></div>
+  <div id="message"></div>
+    </div>
+    <div id="loading" class="loading-overlay">
+  <div class="spinner"></div>
+  <p>กำลังโหลดข้อมูล...</p>
+</div>
+
+    <div id="popup-add">
+        <form id="form-add" method="POST">
+        <h3>เพิ่มข้อมูลสมาชิก</h3>
+        <br />
+        <label for="id">Id</label><br />
+        <input name="id" type="text" placeholder="Id" required/>
+        <br />
+        <label for="title">Title</label><br />
+        <input type="text" name="title" placeholder="Title" />
+        <br />
+        <label for="bio">Bio</label><br />
+        <input type="text" name="bio" placeholder="Bio" />
+        <br />
+        <label for="website">Website</label><br />
+        <input type="text" name="website" placeholder="Website" />
+        <br />
+        <label for="graduated">Graduated</label><br />
+        <select id="graduated" name="graduated" required>
+          <option value="" disabled selected>เลือกสถานะ</option>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+        <br />
+        <button type="button" class="cancel" onclick="onCloseAdd()">ยกเลิก</button>
+         <button class="save" type="submit">บันทึก</button>
+      </form>
+    </div>
+
+    <div id="popup-edit">
+         <form id="form-edit">
+        <h3>แก้ไขข้อมูลสมาชิก</h3>
+        <br />
+        <label for="id">Id</label><br />
+        <input name="id" type="text" placeholder="Id" />
+        <br />
+        <label for="title">Title</label><br />
+        <input type="text" name="title" placeholder="Title" />
+        <br />
+        <label for="bio">Bio</label><br />
+        <input type="text" name="bio" placeholder="Bio" />
+        <br />
+        <label for="website">Website</label><br />
+        <input type="text" name="website" placeholder="Website" />
+        <br />
+        <label for="graduated">Graduated</label><br />
+        <select id="graduated" name="graduated" required>
+          <option value="" disabled selected>เลือกสถานะ</option>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+        <br />
+        <button type="button" class="cancel" onclick="onCloseEdit()">ยกเลิก</button>
+        <button class="save" type="submit">บันทึก</button>
+      </form>
+    </div>
+</body>
+ <script src="api.js"></script>
+</html>
