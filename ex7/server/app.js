@@ -4,7 +4,6 @@ const cors = require('cors');
 const port = 3000;
 
 app.use(cors());
-// Middleware สำหรับอ่าน JSON จาก Body ของ Request
 app.use(express.json());
 
 let quotations = [
@@ -14,7 +13,7 @@ let quotations = [
 ];
 
 app.get('/', (req, res) => {
-  res.send('สวัสดี! Server ของคุณทำงานได้ปกติ');
+  res.send('สวัสดี! Server ทำงานได้ปกติ');
 });
 
 // 1. GET: ดึงรายการคำขอทั้งหมด
