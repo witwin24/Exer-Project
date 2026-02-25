@@ -5,6 +5,17 @@ const port = 3000;
 const sqlite3 = require('sqlite3').verbose()
 const db = new sqlite3.Database('./database.sqlite')
 
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
+const SECRET_KEY = "tMiXppzEPlrj8Qo9Cah3jgcIFAek6Z6M"
+const users = [
+  {
+    id: 1,
+    username: "admin",
+    password: bcrypt.hashSync("1234", 10)
+  }
+] 
+
 app.use(cors());
 app.use(express.json());
 
@@ -24,9 +35,54 @@ db.serialize(() => {
     )
   `)
 })
+// Login
+app.post('/api/login', async (req, res) => {
+  const { username, password } = req.body
 
-// 1. GET All:
-app.get('/api/quotations', (req, res) => {
+  const user = users.find(u => u.username === username)
+
+  if (!user)
+    return res.status(401).json({ error: "ไม่พบผู้ใช้" })
+
+  const validPassword = await bcrypt.compare(password, user.password)
+
+  if (!validPassword)
+    return res.status(401).json({ error: "รหัสผ่านไม่ถูกต้อง" })
+
+  const token = jwt.sign(
+    { id: user.id, username: user.username },
+    SECRET_KEY,
+    { expiresIn: "1h" }
+  )
+
+  res.json({ token })
+})
+
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization']
+  const token = authHeader && authHeader.split(' ')[1]
+
+  if (!token)
+    return res.status(401).json({ error: "ไม่มี Token" })
+
+  jwt.verify(token, SECRET_KEY, (err, user) => {
+    if (err)
+      return res.status(403).json({ error: "Token ไม่ถูกต้อง" })
+
+    req.user = user
+    next()
+  })
+}
+
+// Get me
+app.get('/api/me', authenticateToken, (req, res) => {
+  res.json({
+    message: "ยินดีต้อนรับ",
+    user: req.user
+  })
+})
+// GET All:
+app.get('/api/quotations',authenticateToken, (req, res) => {
   db.all('SELECT * FROM quotations', [], (err, rows) => {
     if (err) return res.status(500).json({ error: err.message })
 
@@ -38,8 +94,8 @@ app.get('/api/quotations', (req, res) => {
     res.json(formatted)
   })
 })
-// 2. GET one:
-app.get('/api/quotations/:id', (req, res) => {
+// GET one:
+app.get('/api/quotations/:id',authenticateToken, (req, res) => {
   const numericId = req.params.id.replace('RQ', '')
 if (isNaN(numericId)) {
   return res.status(400).json({ error: 'รูปแบบ ID ไม่ถูกต้อง' })
@@ -58,7 +114,7 @@ if (isNaN(numericId)) {
 })
 
 // CREATE:
-app.post('/api/quotations', (req, res) => {
+app.post('/api/quotations',authenticateToken, (req, res) => {
   const { customer, subject, deadline, type, status } = req.body
 
   db.run(
@@ -83,7 +139,7 @@ app.post('/api/quotations', (req, res) => {
 })
 
 // UPDATE: 
-app.put('/api/quotations/:id', (req, res) => {
+app.put('/api/quotations/:id',authenticateToken, (req, res) => {
   const { customer, subject, deadline, type, status } = req.body
 
   const numericId = req.params.id.replace('RQ', '')
@@ -106,7 +162,7 @@ if (isNaN(numericId)) {
 })
 
 // DELETE: 
-app.delete('/api/quotations/:id', (req, res) => {
+app.delete('/api/quotations/:id',authenticateToken, (req, res) => {
 
   const numericId = parseInt(req.params.id.replace('RQ', ''), 10)
 
